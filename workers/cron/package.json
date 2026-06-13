@@ -1,0 +1,18 @@
+{
+  "name": "auditwave-cron",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "test": "vitest run",
+    "deploy": "wrangler deploy",
+    "tail": "wrangler tail auditwave-cron --format=pretty"
+  },
+  "devDependencies": {
+    "@cloudflare/workers-types": "^4.20260610.0",
+    "@types/node": "^25.9.3",
+    "tsx": "^4.22.4",
+    "typescript": "^5.8.0",
+    "vitest": "^3.0.0",
+    "wrangler": "^4.100.0"
+  }
+}

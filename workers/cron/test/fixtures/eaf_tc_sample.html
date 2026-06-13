@@ -1,0 +1,351 @@
+tion value="083" >大潭</option>
+<option value="056" >大圍</option>
+<option value="069" >大窩口</option>
+<option value="104" >山頂</option>
+<option value="058" >天后</option>
+<option value="066" >天水圍</option>
+<option value="062" >土瓜灣</option>
+<option value="060" >將軍澳</option>
+<option value="065" >尖沙咀</option>
+<option value="071" >青衣</option>
+<option value="068" >荃灣</option>
+<option value="070" >慈雲山</option>
+<option value="061" >屯門</option>
+<option value="073" >灣仔</option>
+<option value="105" >橫頭磡</option>
+<option value="074" >黃竹坑</option>
+<option value="075" >黃大仙</option>
+<option value="077" >油麻地</option>
+<option value="078" >油塘</option>
+<option value="079" >又一村</option>
+<option value="076" >元朗</option>
+								</select>
+								</div>
+							</div>
+						</div>
+						<div class="row form-group d-flex justify-content-end">
+							<p>
+							<span class="red">* 必須輸入</span>
+							<input type="hidden" name="search_receive" id="search_receive" value=""></input>								
+							<input type="hidden" name="type" id="type" value="search"></input>
+							<input type="submit" onclick="return searchMe()" name="search_btn" id="search_btn" value="搜尋" class="btn btn-primary" />
+							<input type="button" onclick="searchReset()" name="reset_btn" id="reset_btn" value="重設" class="btn btn-secondary" />
+							<input type="button" onclick="searchReset(); return searchMe();" name="showall_btn" class="btn btn-success" id="showall_btn" value="顯示全部" />
+							<a href="../pee/ea__full_list.xlsx" target="_blank"><input type="button"  name="download_btn" id="download_btn" value="下載全部" class="btn btn-secondary" /></a>
+							</p>
+						</div>
+					</div>
+				</form>
+				
+				<div class="remark">
+					<p>備註及免責聲明 :</p>
+					<ol>
+						<li>據「條例」23條，建築物的擁有人必須在建築物的主要入口的顯眼位置，展示有效「能源審核表格」的文本。如發現未有依例展示該有效「能源審核表格」的文本，可<a target="_parent" class="link" href="../mibec_enquiries.html">通知本署</a>跟進。</li>
+						<li>能源審核指有系統地審查建築物的能耗設備／系統，以便找出能源管理機會，爲建築物的擁有人提供有用的資料，以決定及實施節能措施，達到環境保護和經濟效益的目標。如發現在呈交「能源審核表格」的文本予本署的一個月後，有關建築物的資料仍未上載於本列表，有關人士可向<a target="_parent" class="link" href="../mibec_enquiries.html">本署</a>查詢是否已經收到所呈交的文件。</li>
+						<li>「能源使用指數」：就中央屋宇裝備裝置的總能源耗用量而言，指把某特定期間的總能源耗用量除以該建築物的總內部樓面面積。</li>
+						<li>「能源使用指數」可作為該建築物能源管理工作的其中一個參考。由於每幢建築物的中央屋宇裝備裝置的涵蓋範圍、營運模式和運作時間並不相同，因此，直接比較不同建築物的「能源使用指數」並不適當。即使是同一幢建築物，其在不同時期所使用的能源會受很多外在因素影響，例如因應營運需要減少或増加運作時間、人流變化和天氣等，令該建築物的「能源使用指數」會隨著這些因素的變化而有不同的影響。因此，「能源使用指數」的上升亦不一定代表該建築物的能源效益或能源管理轉差。</li>
+						<li>能源審計的資料是根據「條例」第23條所訂明的目標而提供。這些資料會根據建築物的擁有人所提供的更新和澄清而更改，並不會另行通知。未經授權使用，傳輸，披露，複製或變更所提供的信息是嚴格禁止的。政府不會對因使用或關乎使用該等資料而引致的任何損失或損害負上法律責任。</li>
+					</ol>
+				</div>
+			</div><!-- END div search_panel -->
+						
+			<div id="search_results_panel" class="search-results d-none">
+				<h3>能源審核表格的搜尋結果</h3>
+
+				<div class="pager"> 
+					<span>找到 <span class="pagedisplay"> 2748 </span>項記錄</span>
+					<a href="javascript:void(0);" class="first border" aria-label="第一頁"><span class="d-none">第一頁</span></a>
+					<a href="javascript:void(0);" class="prev border" aria-label="上一頁"><span class="d-none">上一頁</span></a>
+					<span class="pageInfo"></span>
+					<a href="javascript:void(0);" class="next border" aria-label="下一頁"><span class="d-none">下一頁</span></a>
+					<a href="javascript:void(0);" class="last border" aria-label="最後頁"><span class="d-none">最後頁</span></a>
+					<select class="pagesize" title="每頁顯示的記錄數目"> 
+						<option selected="selected" value="10">10</option> 
+						<option value="20">20</option> 
+						<option value="30">30</option> 
+						<option value="all">全部</option> 
+					</select>
+					<select class="gotoPage d-none" title="選擇頁數"></select>
+				</div>
+
+
+				<table class="tablesorter responsive" summary="能源審核表格的搜尋結果">
+				<thead>
+					<tr>
+						<th scope="row" rowspan="2">建築物名稱</th>
+						<th scope="row" rowspan="2" class="col-w-60 sorter-false" data-sorter="false">地址</th>
+						<!--<th scope="row" rowspan="2" class="col-w-20 sorter-shortDate dateFormat-ddmmyyyy" data-sorter="shortDate" data-dateFormat="ddmmyyyy">屆滿日期</th>-->
+					</tr>
+				</thead>
+				<tbody><tr class="pointer" data-name="中西區利源東街1/2號" data-addr="香港利源東街1-2號 " data-expiry_date="13/11/2028" data-eui="77.98" data-eui2="77.98" data-prev_expiry_date="-" data-prev_eui="-" data-prev_eui2="-"  data-comparison="-" data-rea="EA00539G" >
+							<td data-title="Building Name"><a href="javascript:void(0);">中西區利源東街1/2號</a></td>
+							<td data-title="Address"><a href="javascript:void(0);">香港利源東街1-2號 </a></td>
+							<!--<td data-title="Expiry date of Energy Aduit Form" class="text-center"><a href="javascript:void(0);">13/11/2028</a></td>-->
+						</tr><tr class="pointer" data-name="(已拆卸) 友邦香港大樓" data-addr="香港鰂魚涌英皇道734-738號 " data-expiry_date="14/07/2025" data-eui="438.36" data-eui2="438.36" data-prev_expiry_date="-" data-prev_eui="-" data-prev_eui2="-"  data-comparison="-" data-rea="EA00019G" >
+							<td data-title="Building Name"><a href="javascript:void(0);">(已拆卸) 友邦香港大樓</a></td>
+							<td data-title="Address"><a href="javascript:void(0);">香港鰂魚涌英皇道734-738號 </a></td>
+							<!--<td data-title="Expiry date of Energy Aduit Form" class="text-center"><a href="javascript:void(0);">14/07/2025</a></td>-->
+						</tr><tr class="pointer" data-name="#NAME?" data-addr="新界天水圍天恩路12-18號 " data-expiry_date="28/08/2033" data-eui="392.2" data-eui2="392.2" data-prev_expiry_date="26/03/2023" data-prev_eui="593.49" data-prev_eui2="593.49"  data-comparison="-33.9
+" data-rea="EA00127G" >
+							<td data-title="Building Name"><a href="javascript:void(0);">#NAME?</a></td>
+							<td data-title="Address"><a href="javascript:void(0);">新界天水圍天恩路12-18號 </a></td>
+							<!--<td data-title="Expiry date of Energy Aduit Form" class="text-center"><a href="javascript:void(0);">28/08/2033</a></td>-->
+						</tr><tr class="pointer" data-name="德輔道西1號" data-addr="香港上環德輔道西1號 " data-expiry_date="10/08/2033" data-eui="75.4" data-eui2="75.4" data-prev_expiry_date="21/08/2023" data-prev_eui="79.2" data-prev_eui2="79.2"  data-comparison="-4.8
+" data-rea="EA00649G" >
+							<td data-title="Building Name"><a href="javascript:void(0);">德輔道西1號</a></td>
+							<td data-title="Address"><a href="javascript:void(0);">香港上環德輔道西1號 </a></td>
+							<!--<td data-title="Expiry date of Energy Aduit Form" class="text-center"><a href="javascript:void(0);">10/08/2033</a></td>-->
+						</tr><tr class="pointer" data-name="都爹利街1號" data-addr="香港中環都爹利街1號 " data-expiry_date="01/12/2033" data-eui="636.5" data-eui2="636.5" data-prev_expiry_date="03/07/2023" data-prev_eui="582.73" data-prev_eui2="582.73"  data-comparison="9.2
+" data-rea="EA00105G" >
+							<td data-title="Building Name"><a href="javascript:void(0);">都爹利街1號</a></td>
+							<td data-title="Address"><a href="javascript:void(0);">香港中環都爹利街1號 </a></td>
+							<!--<td data-title="Expiry date of Energy Aduit Form" class="text-center"><a href="javascript:void(0);">01/12/2033</a></td>-->
+						</tr><tr class="pointer" data-name="一號廣場" data-addr="香港中環擺花街1-7號 " data-expiry_date="27/04/2034" data-eui="505.2" data-eui2="505.2" data-prev_expiry_date="10/04/2024" data-prev_eui="628.68" data-prev_eui2="628.68"  data-comparison="-19.6
+" data-rea="EA00388G" >
+							<td data-title="Building Name"><a href="javascript:void(0);">一號廣場</a></td>
+							<td data-title="Address"><a href="javascript:void(0);">香港中環擺花街1-7號 </a></td>
+							<!--<td data-title="Expiry date of Energy Aduit Form" class="text-center"><a href="javascript:void(0);">27/04/2034</a></td>-->
+						</tr><tr class="pointer" data-name="砵典乍街10號" data-addr="香港中環砵典乍街10號" data-expiry_date="31/07/2023" data-eui="462.64" data-eui2="462.64" data-prev_expiry_date="-" data-prev_eui="-" data-prev_eui2="-"  data-comparison="-" data-rea="EA00092G" >
+							<td data-title="Building Name"><a href="javascript:void(0);">砵典乍街10號</a></td>
+							<td data-title="Address"><a href="javascript:void(0);">香港中環砵典乍街10號</a></td>
+							<!--<td data-title="Expiry date of Energy Aduit Form" class="text-center"><a href="javascript:void(0);">31/07/2023</a></td>-->
+						</tr><tr class="pointer" data-name="寶勒巷10號" data-addr="九龍尖沙咀寶勒巷10號 " data-expiry_date="15/08/2033" data-eui="121.3" data-eui2="121.3" data-prev_expiry_date="12/08/2023" data-prev_eui="274.67" data-prev_eui2="274.67"  data-comparison="-55.8
+" data-rea="EA01316G" >
+							<td data-title="Building Name"><a href="javascript:void(0);">寶勒巷10號</a></td>
+							<td data-title="Address"><a href="javascript:void(0);">九龍尖沙咀寶勒巷10號 </a></td>
+							<!--<td data-title="Expiry date of Energy Aduit Form" class="text-center"><a href="javascript:void(0);">15/08/2033</a></td>-->
+						</tr><tr class="pointer" data-name="100 卑路乍街" data-addr="香港堅尼地城卑路乍街100號 " data-expiry_date="06/07/2023" data-eui="864.4" data-eui2="864.4" data-prev_expiry_date="-" data-prev_eui="-" data-prev_eui2="-"  data-comparison="-" data-rea="EA00097G" >
+							<td data-title="Building Name"><a href="javascript:void(0);">100 卑路乍街</a></td>
+							<td data-title="Address"><a href="javascript:void(0);">香港堅尼地城卑路乍街100號 </a></td>
+							<!--<td data-title="Expiry date of Energy Aduit Form" class="text-center"><a href="javascript:void(0);">06/07/2023</a></td>-->
+						</tr><tr class="pointer" data-name="(請參考英文版本)" data-addr="香港中環皇后大道中100號 " data-expiry_date="21/04/2033" data-eui="707.9" data-eui2="707.9" data-prev_expiry_date="05/08/2023" data-prev_eui="595.35" data-prev_eui2="595.35"  data-comparison="18.9
+" data-rea="EA00649G" >
+							<td data-title="Building Name"><a href="javascript:void(0);">(請參考英文版本)</a></td>
+							<td data-title="Address"><a href="javascript:void(0);">香港中環皇后大道中100號 </a></td>
+							<!--<td data-title="Expiry date of Energy Aduit Form" class="text-center"><a href="javascript:void(0);">21/04/2033</a></td>-->
+						</tr><tr class="pointer" data-name="英皇道101號" data-addr="香港北角英皇道101號 " data-expiry_date="24/04/2024" data-eui="259.92" data-eui2="259.92" data-prev_expiry_date="-" data-prev_eui="-" data-prev_eui2="-"  data-comparison="-" data-rea="EA00333G" >
+							<td data-title="Building Name"><a href="javascript:void(0);">英皇道101號</a></td>
+							<td data-title="Address"><a href="javascript:void(0);">香港北角英皇道101號 </a></td>
+							<!--<td data-title="Expiry date of Energy Aduit Form" class="text-center"><a href="javascript:void(0);">24/04/2024</a></td>-->
+						</tr><tr class="pointer" data-name="柯士甸道102號" data-addr="九龍尖沙咀柯士甸道102號 " data-expiry_date="30/05/2033" data-eui="129.6" data-eui2="129.6" data-prev_expiry_date="22/04/2023" data-prev_eui="128.11" data-prev_eui2="128.11"  data-comparison="-" data-rea="EA00864G" >
+							<td data-title="Building Name"><a href="javascript:void(0);">柯士甸道102號</a></td>
+							<td data-title="Address"><a href="javascript:void(0);">九龍尖沙咀柯士甸道102號 </a></td>
+							<!--<td data-title="Expiry date of Energy Aduit Form" class="text-center"><a href="javascript:void(0);">30/05/2033</a></td>-->
+						</tr><tr class="pointer" data-name="英皇道1063號" data-addr="香港鰂魚涌英皇道1063號 " data-expiry_date="01/06/2033" data-eui="279.1" data-eui2="279.1" data-prev_expiry_date="22/07/2023" data-prev_eui="498.92" data-prev_eui2="498.92"  data-comparison="-44.1
+" data-rea="EA01333G" >
+							<td data-title="Building Name"><a href="javascript:void(0);">英皇道1063號</a></td>
+							<td data-title="Address"><a href="javascript:void(0);">香港鰂魚涌英皇道1063號 </a></td>
+							<!--<td data-title="Expiry date of Energy Aduit Form" class="text-center"><a href="javascript:void(0);">01/06/2033</a></td>-->
+						</tr><tr class="pointer" data-name="(請參考英文版本)" data-addr="香港上環蘇杭街110號 " data-expiry_date="04/07/2025" data-eui="103.1" data-eui2="103.1" data-prev_expiry_date="-" data-prev_eui="-" data-prev_eui2="-"  data-comparison="-" data-rea="EA00612G" >
+							<td data-title="Building Name"><a href="javascript:void(0);">(請參考英文版本)</a></td>
+							<td data-title="Address"><a href="javascript:void(0);">香港上環蘇杭街110號 </a></td>
+							<!--<td data-title="Expiry date of Energy Aduit Form" class="text-center"><a href="javascript:void(0);">04/07/2025</a></td>-->
+						</tr><tr class="pointer" data-name="英皇道1111號 (前稱: 太古城中心一座)" data-addr="香港太古城英皇道1111號 " data-expiry_date="01/05/2032" data-eui="316.9" data-eui2="316.9" data-prev_expiry_date="17/09/2022" data-prev_eui="414.26" data-prev_eui2="414.26"  data-comparison="-" data-rea="EA00127G" >
+							<td data-title="Building Name"><a href="javascript:void(0);">英皇道1111號 (前稱: 太古城中心一座)</a></td>
+							<td data-title="Address"><a href="javascript:void(0);">香港太古城英皇道1111號 </a></td>
+							<!--<td data-title="Expiry date of Energy Aduit Form" class="text-center"><a href="javascript:void(0);">01/05/2032</a></td>-->
+						</tr><tr class="pointer" data-name="雙喜樓" data-addr="香港灣仔莊士敦道112號 " data-expiry_date="06/09/2020" data-eui="74.52" data-eui2="74.52" data-prev_expiry_date="-" data-prev_eui="-" data-prev_eui2="-"  data-comparison="-" data-rea="EA00608G" >
+							<td data-title="Building Name"><a href="javascript:void(0);">雙喜樓</a></td>
+							<td data-title="Address"><a href="javascript:void(0);">香港灣仔莊士敦道112號 </a></td>
+							<!--<td data-title="Expiry date of Energy Aduit Form" class="text-center"><a href="javascript:void(0);">06/09/2020</a></td>-->
+						</tr><tr class="pointer" data-name="干諾道西118號" data-addr="香港西營盤干諾道西118號 " data-expiry_date="14/07/2033" data-eui="318.7" data-eui2="318.7" data-prev_expiry_date="17/05/2023" data-prev_eui="452.01" data-prev_eui2="452.01"  data-comparison="-29.5
+" data-rea="EA00887G" >
+							<td data-title="Building Name"><a href="javascript:void(0);">干諾道西118號</a></td>
+							<td data-title="Address"><a href="javascript:void(0);">香港西營盤干諾道西118號 </a></td>
+							<!--<td data-title="Expiry date of Energy Aduit Form" class="text-center"><a href="javascript:void(0);">14/07/2033</a></td>-->
+						</tr><tr class="pointer" data-name="豉油街12號" data-addr="九龍油麻地上海街479-481號 " data-expiry_date="14/10/2023" data-eui="463.23" data-eui2="463.23" data-prev_expiry_date="-" data-prev_eui="-" data-prev_eui2="-"  data-comparison="-" data-rea="EA00092G" >
+							<td data-title="Building Name"><a href="javascript:void(0);">豉油街12號</a></td>
+							<td data-title="Address"><a href="javascript:void(0);">九龍油麻地上海街479-481號 </a></td>
+							<!--<td data-title="Expiry date of Energy Aduit Form" class="text-center"><a href="javascript:void(0);">14/10/2023</a></td>-->
+						</tr><tr class="pointer" data-name="太古灣道12號 (前稱: 太古城中心四座)" data-addr="香港太古城太古灣道12號 " data-expiry_date="01/05/2032" data-eui="296.5" data-eui2="296.5" data-prev_expiry_date="01/03/2022" data-prev_eui="436.04" data-prev_eui2="436.04"  data-comparison="-" data-rea="EA00127G" >
+							<td data-title="Building Name"><a href="javascript:void(0);">太古灣道12號 (前稱: 太古城中心四座)</a></td>
+							<td data-title="Address"><a href="javascript:void(0);">香港太古城太古灣道12號 </a></td>
+							<!--<td data-title="Expiry date of Energy Aduit Form" class="text-center"><a href="javascript:void(0);">01/05/2032</a></td>-->
+						</tr><tr class="pointer" data-name="偉業街133號" data-addr="九龍觀塘偉業街133號 " data-expiry_date="02/12/2034" data-eui="351.8" data-eui2="351.8" data-prev_expiry_date="-" data-prev_eui="-" data-prev_eui2="-"  data-comparison="-" data-rea="EA00374G" >
+							<td data-title="Building Name"><a href="javascript:void(0);">偉業街133號</a></td>
+							<td data-title="Address"><a href="javascript:void(0);">九龍觀塘偉業街133號 </a></td>
+							<!--<td data-title="Expiry date of Energy Aduit Form" class="text-center"><a href="javascript:void(0);">02/12/2034</a></td>-->
+						</tr><tr class="pointer" data-name="文咸東街135商業中心" data-addr="香港上環文咸東街135號 " data-expiry_date="01/08/2033" data-eui="92.07" data-eui2="92.07" data-prev_expiry_date="01/08/2023" data-prev_eui="77.06" data-prev_eui2="77.06"  data-comparison="19.6
+" data-rea="EA00019G" >
+							<td data-title="Building Name"><a href="javascript:void(0);">文咸東街135商業中心</a></td>
+							<td data-title="Address"><a href="javascript:void(0);">香港上環文咸東街135號 </a></td>
+							<!--<td data-title="Expiry date of Energy Aduit Form" class="text-center"><a href="javascript:void(0);">01/08/2033</a></td>-->
+						</tr><tr class="pointer" data-name="太古灣道14號 (前稱: 太古城中心三座)" data-addr="香港太古城太古灣道14號 " data-expiry_date="01/05/2032" data-eui="379.5" data-eui2="379.5" data-prev_expiry_date="01/03/2022" data-prev_eui="480.24" data-prev_eui2="480.24"  data-comparison="-" data-rea="EA00127G" >
+							<td data-title="Building Name"><a href="javascript:void(0);">太古灣道14號 (前稱: 太古城中心三座)</a></td>
+							<td data-title="Address"><a href="javascript:void(0);">香港太古城太古灣道14號 </a></td>
+							<!--<td data-title="Expiry date of Energy Aduit Form" class="text-center"><a href="javascript:void(0);">01/05/2032</a></td>-->
+						</tr><tr class="pointer" data-name="電氣道148號" data-addr="香港北角電氣道148號" data-expiry_date="07/08/2033" data-eui="124.5" data-eui2="124.5" data-prev_expiry_date="01/07/2023" data-prev_eui="145.11" data-prev_eui2="145.11"  data-comparison="-14.2
+" data-rea="EA01300G" >
+							<td data-title="Building Name"><a href="javascript:void(0);">電氣道148號</a></td>
+							<td data-title="Address"><a href="javascript:void(0);">香港北角電氣道148號</a></td>
+							<!--<td data-title="Expiry date of Energy Aduit Form" class="text-center"><a href="javascript:void(0);">07/08/2033</a></td>-->
+						</tr><tr class="pointer" data-name="紫薇街15號" data-addr="香港西營盤紫薇街15號 " data-expiry_date="16/09/2025" data-eui="217.01" data-eui2="217.01" data-prev_expiry_date="-" data-prev_eui="-" data-prev_eui2="-"  data-comparison="-" data-rea="EA00887G" >
+							<td data-title="Building Name"><a href="javascript:void(0);">紫薇街15號</a></td>
+							<td data-title="Address"><a href="javascript:void(0);">香港西營盤紫薇街15號 </a></td>
+							<!--<td data-title="Expiry date of Energy Aduit Form" class="text-center"><a href="javascript:void(0);">16/09/2025</a></td>-->
+						</tr><tr class="pointer" data-name="151駱克道" data-addr="香港灣仔駱克道151號" data-expiry_date="07/09/2033" data-eui="227.7" data-eui2="227.7" data-prev_expiry_date="18/07/2023" data-prev_eui="197.9" data-prev_eui2="197.9"  data-comparison="15
+" data-rea="EA01412G" >
+							<td data-title="Building Name"><a href="javascript:void(0);">151駱克道</a></td>
+							<td data-title="Address"><a href="javascript:void(0);">香港灣仔駱克道151號</a></td>
+							<!--<td data-title="Expiry date of Energy Aduit Form" class="text-center"><a href="javascript:void(0);">07/09/2033</a></td>-->
+						</tr><tr class="pointer" data-name="威靈頓街154號" data-addr="香港中環威靈頓街154號 " data-expiry_date="25/02/2022" data-eui="94.33" data-eui2="94.33" data-prev_expiry_date="-" data-prev_eui="-" data-prev_eui2="-"  data-comparison="-" data-rea="EA00092G" >
+							<td data-title="Building Name"><a href="javascript:void(0);">威靈頓街154號</a></td>
+							<td data-title="Address"><a href="javascript:void(0);">香港中環威靈頓街154號 </a></td>
+							<!--<td data-title="Expiry date of Energy Aduit Form" class="text-center"><a href="javascript:void(0);">25/02/2022</a></td>-->
+						</tr><tr class="pointer" data-name="威靈頓街156-158號" data-addr="香港中環威靈頓街156-158號 " data-expiry_date="22/02/2022" data-eui="4.89" data-eui2="4.89" data-prev_expiry_date="-" data-prev_eui="-" data-prev_eui2="-"  data-comparison="-" data-rea="EA00092G" >
+							<td data-title="Building Name"><a href="javascript:void(0);">威靈頓街156-158號</a></td>
+							<td data-title="Address"><a href="javascript:void(0);">香港中環威靈頓街156-158號 </a></td>
+							<!--<td data-title="Expiry date of Energy Aduit Form" class="text-center"><a href="javascript:void(0);">22/02/2022</a></td>-->
+						</tr><tr class="pointer" data-name="勿地臣街 15 號A" data-addr="香港灣仔勿地臣街15A號 " data-expiry_date="20/02/2035" data-eui="72.1" data-eui2="72.1" data-prev_expiry_date="09/06/2025" data-prev_eui="115.17" data-prev_eui2="115.17"  data-comparison="-37.4
+" data-rea="EA00019G" >
+							<td data-title="Building Name"><a href="javascript:void(0);">勿地臣街 15 號A</a></td>
+							<td data-title="Address"><a href="javascript:void(0);">香港灣仔勿地臣街15A號 </a></td>
+							<!--<td data-title="Expiry date of Energy Aduit Form" class="text-center"><a href="javascript:void(0);">20/02/2035</a></td>-->
+						</tr><tr class="pointer" data-name="(請參考英文版本)" data-addr="香港香港仔香港仔大道164號 " data-expiry_date="14/08/2025" data-eui="692.48" data-eui2="692.48" data-prev_expiry_date="-" data-prev_eui="-" data-prev_eui2="-"  data-comparison="-" data-rea="EA00887G" >
+							<td data-title="Building Name"><a href="javascript:void(0);">(請參考英文版本)</a></td>
+							<td data-title="Address"><a href="javascript:void(0);">香港香港仔香港仔大道164號 </a></td>
+							<!--<td data-title="Expiry date of Energy Aduit Form" class="text-center"><a href="javascript:void(0);">14/08/2025</a></td>-->
+						</tr><tr class="pointer" data-name="亞士厘道17-19號" data-addr="九龍尖沙咀亞士厘道17-19號 " data-expiry_date="03/03/2033" data-eui="107.1" data-eui2="107.1" data-prev_expiry_date="01/08/2023" data-prev_eui="129.66" data-prev_eui2="129.66"  data-comparison="-17.4
+" data-rea="EA00864G" >
+							<td data-title="Building Name"><a href="javascript:void(0);">亞士厘道17-19號</a></td>
+							<td data-title="Address"><a href="javascript:void(0);">九龍尖沙咀亞士厘道17-19號 </a></td>
+							<!--<td data-title="Expiry date of Energy Aduit Form" class="text-center"><a href="javascript:void(0);">03/03/2033</a></td>-->
+						</tr><tr class="pointer" data-name="農圃道18號" data-addr="九龍土瓜灣農圃道18號 " data-expiry_date="02/06/2033" data-eui="141.2" data-eui2="141.2" data-prev_expiry_date="20/06/2023" data-prev_eui="223.1" data-prev_eui2="223.1"  data-comparison="-36.7
+" data-rea="EA00019G" >
+							<td data-title="Building Name"><a href="javascript:void(0);">農圃道18號</a></td>
+							<td data-title="Address"><a href="javascript:void(0);">九龍土瓜灣農圃道18號 </a></td>
+							<!--<td data-title="Expiry date of Energy Aduit Form" class="text-center"><a href="javascript:void(0);">02/06/2033</a></td>-->
+						</tr><tr class="pointer" data-name="中環安蘭街18號" data-addr="香港中環安蘭街18號 " data-expiry_date="03/10/2026" data-eui="215.58" data-eui2="215.58" data-prev_expiry_date="-" data-prev_eui="-" data-prev_eui2="-"  data-comparison="-" data-rea="EA00506G" >
+							<td data-title="Building Name"><a href="javascript:void(0);">中環安蘭街18號</a></td>
+							<td data-title="Address"><a href="javascript:void(0);">香港中環安蘭街18號 </a></td>
+							<!--<td data-title="Expiry date of Energy Aduit Form" class="text-center"><a href="javascript:void(0);">03/10/2026</a></td>-->
+						</tr><tr class="pointer" data-name="(請參考英文版本)" data-addr="九龍尖沙咀廣東道2A號 " data-expiry_date="11/09/2033" data-eui="527.9" data-eui2="527.9" data-prev_expiry_date="30/09/2023" data-prev_eui="790.01" data-prev_eui2="790.01"  data-comparison="-33.2
+" data-rea="EA00887G" >
+							<td data-title="Building Name"><a href="javascript:void(0);">(請參考英文版本)</a></td>
+							<td data-title="Address"><a href="javascript:void(0);">九龍尖沙咀廣東道2A號 </a></td>
+							<!--<td data-title="Expiry date of Energy Aduit Form" class="text-center"><a href="javascript:void(0);">11/09/2033</a></td>-->
+						</tr><tr class="pointer" data-name="(請參考英文版本)" data-addr="九龍旺角西洋菜街南1L-1M號 " data-expiry_date="25/10/2034" data-eui="3.1" data-eui2="3.1" data-prev_expiry_date="-" data-prev_eui="-" data-prev_eui2="-"  data-comparison="-" data-rea="EA01314G" >
+							<td data-title="Building Name"><a href="javascript:void(0);">(請參考英文版本)</a></td>
+							<td data-title="Address"><a href="javascript:void(0);">九龍旺角西洋菜街南1L-1M號 </a></td>
+							<!--<td data-title="Expiry date of Energy Aduit Form" class="text-center"><a href="javascript:void(0);">25/10/2034</a></td>-->
+						</tr><tr class="pointer" data-name="加拿分道2號" data-addr="九龍尖沙咀加拿分道2號 " data-expiry_date="04/08/2033" data-eui="138.8" data-eui2="138.8" data-prev_expiry_date="05/08/2023" data-prev_eui="349" data-prev_eui2="349"  data-comparison="-60.2
+" data-rea="EA00864G" >
+							<td data-title="Building Name"><a href="javascript:void(0);">加拿分道2號</a></td>
+							<td data-title="Address"><a href="javascript:void(0);">九龍尖沙咀加拿分道2號 </a></td>
+							<!--<td data-title="Expiry date of Energy Aduit Form" class="text-center"><a href="javascript:void(0);">04/08/2033</a></td>-->
+						</tr><tr class="pointer" data-name="安蘭街2號" data-addr="香港中環安蘭街" data-expiry_date="08/12/2025" data-eui="412.9" data-eui2="412.9" data-prev_expiry_date="-" data-prev_eui="-" data-prev_eui2="-"  data-comparison="-" data-rea="EA00482G" >
+							<td data-title="Building Name"><a href="javascript:void(0);">安蘭街2號</a></td>
+							<td data-title="Address"><a href="javascript:void(0);">香港中環安蘭街</a></td>
+							<!--<td data-title="Expiry date of Energy Aduit Form" class="text-center"><a href="javascript:void(0);">08/12/2025</a></td>-->
+						</tr><tr class="pointer" data-name="域多利皇后街2號" data-addr="香港中環域多利皇后街2號 " data-expiry_date="22/03/2027" data-eui="109.62" data-eui2="109.62" data-prev_expiry_date="-" data-prev_eui="-" data-prev_eui2="-"  data-comparison="-" data-rea="EA00887G" >
+							<td data-title="Building Name"><a href="javascript:void(0);">域多利皇后街2號</a></td>
+							<td data-title="Address"><a href="javascript:void(0);">香港中環域多利皇后街2號 </a></td>
+							<!--<td data-title="Expiry date of Energy Aduit Form" class="text-center"><a href="javascript:void(0);">22/03/2027</a></td>-->
+						</tr><tr class="pointer" data-name="2-4 九如坊" data-addr="香港中環九如坊2-4號 " data-expiry_date="02/02/2025" data-eui="15.09" data-eui2="15.09" data-prev_expiry_date="-" data-prev_eui="-" data-prev_eui2="-"  data-comparison="-" data-rea="EA00167G" >
+							<td data-title="Building Name"><a href="javascript:void(0);">2-4 九如坊</a></td>
+							<td data-title="Address"><a href="javascript:void(0);">香港中環九如坊2-4號 </a></td>
+							<!--<td data-title="Expiry date of Energy Aduit Form" class="text-center"><a href="javascript:void(0);">02/02/2025</a></td>-->
+						</tr><tr class="pointer" data-name="202 中心" data-addr="香港上環德輔道西202-204號 " data-expiry_date="04/07/2033" data-eui="85.5" data-eui2="85.5" data-prev_expiry_date="24/06/2023" data-prev_eui="126.75" data-prev_eui2="126.75"  data-comparison="-32.6
+" data-rea="EA00506G" >
+							<td data-title="Building Name"><a href="javascript:void(0);">202 中心</a></td>
+							<td data-title="Address"><a href="javascript:void(0);">香港上環德輔道西202-204號 </a></td>
+							<!--<td data-title="Expiry date of Energy Aduit Form" class="text-center"><a href="javascript:void(0);">04/07/2033</a></td>-->
+						</tr><tr class="pointer" data-name="皇后大道中215號" data-addr="香港中環皇后大道中215號 " data-expiry_date="28/08/2025" data-eui="24.48" data-eui2="24.48" data-prev_expiry_date="-" data-prev_eui="-" data-prev_eui2="-"  data-comparison="-" data-rea="EA00693G" >
+							<td data-title="Building Name"><a href="javascript:void(0);">皇后大道中215號</a></td>
+							<td data-title="Address"><a href="javascript:void(0);">香港中環皇后大道中215號 </a></td>
+							<!--<td data-title="Expiry date of Energy Aduit Form" class="text-center"><a href="javascript:void(0);">28/08/2025</a></td>-->
+						</tr><tr class="pointer" data-name="怡和街22" data-addr="香港銅鑼灣怡和街22號 " data-expiry_date="22/02/2033" data-eui="430.6" data-eui2="430.6" data-prev_expiry_date="25/02/2023" data-prev_eui="382" data-prev_eui2="382"  data-comparison="12.7
+" data-rea="EA00579G" >
+							<td data-title="Building Name"><a href="javascript:void(0);">怡和街22</a></td>
+							<td data-title="Address"><a href="javascript:void(0);">香港銅鑼灣怡和街22號 </a></td>
+							<!--<td data-title="Expiry date of Energy Aduit Form" class="text-center"><a href="javascript:void(0);">22/02/2033</a></td>-->
+						</tr><tr class="pointer" data-name="永樂街227號" data-addr="香港上環永樂街227-0號 " data-expiry_date="13/07/2027" data-eui="34.28" data-eui2="34.28" data-prev_expiry_date="-" data-prev_eui="-" data-prev_eui2="-"  data-comparison="-" data-rea="EA00050G" >
+							<td data-title="Building Name"><a href="javascript:void(0);">永樂街227號</a></td>
+							<td data-title="Address"><a href="javascript:void(0);">香港上環永樂街227-0號 </a></td>
+							<!--<td data-title="Expiry date of Energy Aduit Form" class="text-center"><a href="javascript:void(0);">13/07/2027</a></td>-->
+						</tr><tr class="pointer" data-name="永樂街235商業中心" data-addr="永樂街235號 " data-expiry_date="01/02/2033" data-eui="58.6" data-eui2="58.6" data-prev_expiry_date="29/04/2023" data-prev_eui="105.01" data-prev_eui2="105.01"  data-comparison="-44.2
+" data-rea="EA00127G" >
+							<td data-title="Building Name"><a href="javascript:void(0);">永樂街235商業中心</a></td>
+							<td data-title="Address"><a href="javascript:void(0);">永樂街235號 </a></td>
+							<!--<td data-title="Expiry date of Energy Aduit Form" class="text-center"><a href="javascript:void(0);">01/02/2033</a></td>-->
+						</tr><tr class="pointer" data-name="彌敦道238號" data-addr="九龍佐敦彌敦道238號 " data-expiry_date="10/01/2034" data-eui="540.4" data-eui2="540.4" data-prev_expiry_date="11/01/2024" data-prev_eui="641.95" data-prev_eui2="641.95"  data-comparison="-15.8
+" data-rea="EA00019G" >
+							<td data-title="Building Name"><a href="javascript:void(0);">彌敦道238號</a></td>
+							<td data-title="Address"><a href="javascript:void(0);">九龍佐敦彌敦道238號 </a></td>
+							<!--<td data-title="Expiry date of Energy Aduit Form" class="text-center"><a href="javascript:void(0);">10/01/2034</a></td>-->
+						</tr><tr class="pointer" data-name="軒尼詩道239號" data-addr="香港灣仔軒尼詩道235-239號 " data-expiry_date="04/04/2033" data-eui="263.4" data-eui2="263.4" data-prev_expiry_date="06/07/2023" data-prev_eui="188.37" data-prev_eui2="188.37"  data-comparison="39.8
+" data-rea="EA00864G" >
+							<td data-title="Building Name"><a href="javascript:void(0);">軒尼詩道239號</a></td>
+							<td data-title="Address"><a href="javascript:void(0);">香港灣仔軒尼詩道235-239號 </a></td>
+							<!--<td data-title="Expiry date of Energy Aduit Form" class="text-center"><a href="javascript:void(0);">04/04/2033</a></td>-->
+						</tr><tr class="pointer" data-name="皇后大道東248號" data-addr="香港灣仔皇后大道東248號 " data-expiry_date="29/04/2023" data-eui="403.86" data-eui2="403.86" data-prev_expiry_date="-" data-prev_eui="-" data-prev_eui2="-"  data-comparison="-" data-rea="EA00374G" >
+							<td data-title="Building Name"><a href="javascript:void(0);">皇后大道東248號</a></td>
+							<td data-title="Address"><a href="javascript:void(0);">香港灣仔皇后大道東248號 </a></td>
+							<!--<td data-title="Expiry date of Energy Aduit Form" class="text-center"><a href="javascript:void(0);">29/04/2023</a></td>-->
+						</tr><tr class="pointer" data-name="軒尼詩道250號" data-addr="香港灣仔軒尼詩道244-250號 " data-expiry_date="28/12/2032" data-eui="232.5" data-eui2="232.5" data-prev_expiry_date="02/09/2023" data-prev_eui="326.87" data-prev_eui2="326.87"  data-comparison="-29.1
+" data-rea="EA00635G" >
+							<td data-title="Building Name"><a href="javascript:void(0);">軒尼詩道250號</a></td>
+							<td data-title="Address"><a href="javascript:void(0);">香港灣仔軒尼詩道244-250號 </a></td>
+							<!--<td data-title="Expiry date of Energy Aduit Form" class="text-center"><a href="javascript:void(0);">28/12/2032</a></td>-->
+						</tr><tr class="pointer" data-name="彌敦道26號" data-addr="九龍尖沙咀彌敦道26號 " data-expiry_date="23/05/2033" data-eui="550.7" data-eui2="550.7" data-prev_expiry_date="04/09/2023" data-prev_eui="951.92" data-prev_eui2="951.92"  data-comparison="-42.1
+" data-rea="EA00019G" >
+							<td data-title="Building Name"><a href="javascript:void(0);">彌敦道26號</a></td>
+							<td data-title="Address"><a href="javascript:void(0);">九龍尖沙咀彌敦道26號 </a></td>
+							<!--<td data-title="Expiry date of Energy Aduit Form" class="text-center"><a href="javascript:void(0);">23/05/2033</a></td>-->
+						</tr><tr class="pointer" data-name="機利文新街26-28" data-addr="香港中環機利文新街26-28號 " data-expiry_date="04/01/2034" data-eui="41.25" data-eui2="41.25" data-prev_expiry_date="20/08/2024" data-prev_eui="50.1" data-prev_eui2="50.1"  data-comparison="-17.66
+" data-rea="EA01358G" >
+							<td data-title="Building Name"><a href="javascript:void(0);">機利文新街26-28</a></td>
+							<td data-title="Address"><a href="javascript:void(0);">香港中環機利文新街26-28號 </a></td>
+							<!--<td data-title="Expiry date of Energy Aduit Form" class="text-center"><a href="javascript:void(0);">04/01/2034</a></td>-->
+						</tr><tr class="pointer" data-name="軒尼詩道28號" data-addr="香港灣仔軒尼詩道28號 " data-expiry_date="17/04/2033" data-eui="322.7" data-eui2="322.7" data-prev_expiry_date="01/07/2023" data-prev_eui="152.59" data-prev_eui2="152.59"  data-comparison="111.6
+" data-rea="EA00117G" >
+							<td data-title="Building Name"><a href="javascript:void(0);">軒尼詩道28號</a></td>
+							<td data-title="Address"><a href="javascript:void(0);">香港灣仔軒尼詩道28號 </a></td>
+							<!--<td data-title="Expiry date of Energy Aduit Form" class="text-center"><a href="javascript:void(0);">17/04/2033</a></td>-->
+						</tr><tr class="pointer" data-name="柯士甸道29號" data-addr="九龍尖沙咀柯士甸道29號 " data-expiry_date="01/12/2032" data-eui="317.1" data-eui2="317.1" data-prev_expiry_date="15/03/2023" data-prev_eui="441" data-prev_eui2="441"  data-comparison="-28.1
+" data-rea="EA00142G" >
+							<td data-title="Building Name"><a href="javascript:void(0);">柯士甸道29號</a></td>
+							<td data-title="Address"><a href="javascript:void(0);">九龍尖沙咀柯士甸道29號 </a></td>
+							<!--<td data-title="Expiry date of Energy Aduit Form" class="text-center"><a href="javascript:void(0);">01/12/2032</a></td>-->
+						</tr><tr class="pointer" data-name="298 電腦特區" data-addr="香港灣仔軒尼詩道298號 " data-expiry_date="09/07/2025" data-eui="1151.57" data-eui2="1151.57" data-prev_expiry_date="-" data-prev_eui="-" data-prev_eui2="-"  data-comparison="-" data-rea="EA00154G" >
+							<td data-title="Building Name"><a href="javascript:void(0);">298 電腦特區</a></td>
+							<td data-title="Address"><a href="javascript:void(0);">香港灣仔軒尼詩道298號 </a></td>
+							<!--<td data-title="Expiry date of Energy Aduit Form" class="text-center"><a href="javascript:void(0);">09/07/2025</a></td>-->
+						</tr><tr class="pointer" data-name="(請參考英文版本)" data-addr="香港上環皇后大道中287-299號 " data-expiry_date="13/07/2034" data-eui="355.7" data-eui2="355.7" data-prev_expiry_date="01/04/2024" data-prev_eui="311.66" data-prev_eui2="311.66"  data-comparison="14.1
+" data-rea="EA01316G" >
+							<td data-title="Building Name"><a href="javascript:void(0);">(請參考英文版本)</a></td>
+							<td data-title="Address"><a href="javascript:void(0);">香港上環皇后大道中287-299號 </a></td>
+							<!--<td data-title="Expiry date of Energy Aduit Form" class="text-center"><a href="javascript:void(0);">13/07/2034</a></td>-->
+						</tr><tr class="pointer" data-name="九如坊2A號" data-addr="香港中環九如坊2A號 " data-expiry_date="28/02/2035" data-eui="16.8" data-eui2="16.8" data-prev_expiry_date="12/02/2025" data-prev_eui="40.2" data-prev_eui2="40.2"  data-comparison="-58.2
+" data-rea="EA01412G" >
+							<td data-title="Building Name"><a href="javascript:void(0);">九如坊2A號</a></td>
+							<td data-title="Address"><a href="javascript:void(0);">香港中環九如坊2A號 </a></td>
+							<!--<td data-title="Expiry date of Energy Aduit Form" class="text-center"><a href="javascript:void(0);">28/02/2035</a></td>-->
+						</tr><tr class="pointer" data-name="卑路乍街2A-2B號" data-addr="香港堅尼地城卑路乍街2A-2B號 " data-expiry_date="16/03/2027" data-eui="4.29" data-eui2="4.29" data-prev_expiry_date="-" data-prev_eui="-" data-prev_eui2="-"  data-comparison="-" data-rea="EA00305G" >
+							<td data-title="Building Name"><a href="javascript:void(0);">卑路乍街2A-2B號</a></td>
+							<td data-title="Address"><a href="javascript:void(0);">香港堅尼地城卑路乍街2A-2B號 </a></td>
+							<!--<td data-title="Expiry date of Energy Aduit Form" class="text-center"><a href="javascript:void(0);">16/03/2027</a></td>-->
+						</tr><tr class="pointer" data-name="駱克道3號" data-addr="香港灣仔駱克道3號 " data-expiry_date="15/09/2033" data-eui="221.3" data-eui2="221.3" data-prev_expiry_date="19/09/2023" data-prev_eui="237.34" data-prev_eui2="237.34"  data-comparison="-6.8
+" data-rea="EA00649G" >
+							<td data-title="Building Name"><a href="javascript:void(0);">駱克道3號</a></td>
+							<td data-title="Address"><a href="javascript:void(0);">香港灣仔駱克道3號 </a></td>
+							<!--<td data-title="Expiry date of Energy Aduit Form" class="text-center"><a href="javascript:void(0);">15/09/2033</a></td>-->
+						</tr><tr class="pointer" data-name="鴻圖道30號" data-addr="九龍觀塘鴻圖道30號 " data-expiry_date="28/11/2034" data-eui="2935.9" data-eui2="2935.9" data-prev_expiry_date="10/08/2025" data-prev_eui="1452.52" data-prev_eui2="1452.52"  data-comparison="102.1
+" data-rea="EA00649G" >
+							<td data-title="Building Name"><a href="javascript:void(0);">鴻圖道30號</a></td>
+							<td data-title="Address"><a href="javascript:void(0);">九龍觀塘鴻圖道30號 </a></td>
+							<!--<td data-title="Expiry date of Energy Aduit Form" class="text-center"><a href="javascript:void(0);">28/11/2034</a></td>-->
+						</tr><tr class="pointer" data-name="中西區荷李活道31/33號" data-addr="香港荷李活道31-33號 " data-expiry_date="25/08/2026" data-eui="56.11" data-eui2="56.11" data-prev_expiry_date="-" data-prev_eui="-" data-prev_eui2="-"  data-comparison="-" data-rea="EA00579G" >
+							<td data-title="Building Name"><a href="javascript:void(0);">中西區荷李活道31/33號</a></td>
+							<td data-title="Address"><a href="javascript:void(0);">香港荷李活道31-33號 </a></td>
+							<!--<td data-title="Expiry date of Energy Aduit Form" class="text-center"><a href="javascript:void(0);">25/08/2026</a></td>-->
+						</tr><tr class="pointer" data-name="駱克道313號" data-addr="香港灣仔駱克道313號 " data-expiry_date="01/04/2034" data-eui="74.5" data-eui2="74.5" data-prev_expiry_date="08/04/2024" data-prev_eui="99.76" data-prev_eui2="99.76"  data-comparison="-25.4
+" data-rea="EA00887G" >
+							<td data-title="Building Name"><a href="javascript:void(0);">駱克道313號</a></td>
+							<td data-title="Address"><a href="javascript:void(0);">香港灣仔駱克道313號 </a></td>
+							<!--<td data-title="Expiry date of Energy Aduit Form" class="text-center"><a href="javascript:void(0);">01/04/2034</a></td>-->
+						</tr><tr class="pointer" data-name="雲咸街31C-D 號" data-addr="香港雲咸街31C-31D號 " data-expiry_date="28/02/2026" data-eui="71.316" data-eui2="71.32" data-prev_expiry_date="-" data-prev_eui="-" data-prev_eui2="-"  data-comparison="-" data-rea="EA00158G" >
+							<td data-title="Building Name"><a href="javascript:void(0);">雲咸街31C-D 號</a></td>
+							<td data-title="Address"><a href="javascript:void(0);">香港雲咸街31C-31D號 </a></td>
+							<!--<td data-title="Expiry date of Energy Aduit Form" class="text-center"><a href="javascript:void(0);">28/02/2026</a></td>-->
+						</tr></tbody></table></html>

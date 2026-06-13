@@ -1,0 +1,32 @@
+name = "auditwave-cron"
+main = "src/index.ts"
+compatibility_date = "2026-06-01"
+
+[triggers]
+crons = ["0 18 * * *", "0 0 * * 1"]
+
+[[d1_databases]]
+binding = "DB"
+database_name = "auditwave-db"
+database_id = "99a57571-2f63-42ec-b904-718759df423d"
+
+[[r2_buckets]]
+binding = "CRAWL_CACHE"
+bucket_name = "auditwave-crawl-cache"
+
+[[queues.producers]]
+queue = "auditwave-queue"
+binding = "PIPELINE_QUEUE"
+
+[[queues.consumers]]
+queue = "auditwave-queue"
+max_batch_size = 5
+max_retries = 3
+
+[vars]
+EMSD_EAF_EN_URL = "https://www.emsd.gov.hk/beeo/en/register/search_eaf.php"
+EMSD_EAF_TC_URL = "https://www.emsd.gov.hk/beeo/tc/register/search_eaf.php"
+SITE_URL = "https://auditwave.pages.dev"
+SYSTEM_FROM_EMAIL = "hello@auditwavehk.com"
+ALERT_EMAIL = "shing0012000@gmail.com"
+EMAIL_DRY_RUN = "1"

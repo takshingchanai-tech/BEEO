@@ -1,0 +1,14 @@
+{
+  "name": "auditwave-api",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "deploy": "wrangler deploy",
+    "tail": "wrangler tail auditwave-api --format=pretty"
+  },
+  "devDependencies": {
+    "@cloudflare/workers-types": "^4.20260610.0",
+    "typescript": "^5.8.0",
+    "wrangler": "^4.100.0"
+  }
+}

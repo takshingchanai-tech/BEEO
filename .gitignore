@@ -1,0 +1,23 @@
+# Dependencies
+node_modules/
+
+# Build outputs
+.next/
+out/
+dist/
+
+# Wrangler local state
+.wrangler/
+
+# Secrets (never commit)
+.env
+.env.*
+workers/cron/.cron_trigger_key
+
+# macOS
+.DS_Store
+
+# Editor
+.idea/
+.vscode/
+*.swp

@@ -1,0 +1,6 @@
+@import "tailwindcss";
+
+:root {
+  font-family: -apple-system, "Segoe UI", Helvetica, Arial, "PingFang TC",
+    "Microsoft JhengHei", sans-serif;
+}

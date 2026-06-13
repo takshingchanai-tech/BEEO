@@ -1,0 +1,14 @@
+name = "auditwave-api"
+main = "src/index.ts"
+compatibility_date = "2026-06-01"
+
+[[d1_databases]]
+binding = "DB"
+database_name = "auditwave-db"
+database_id = "99a57571-2f63-42ec-b904-718759df423d"
+
+[vars]
+SITE_URL = "https://auditwave.pages.dev"
+CORS_ORIGIN = "https://auditwave.pages.dev"
+SYSTEM_FROM_EMAIL = "hello@auditwavehk.com"
+EMAIL_DRY_RUN = "1"
