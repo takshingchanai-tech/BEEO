@@ -30,3 +30,4 @@ SITE_URL = "https://auditwave.pages.dev"
 SYSTEM_FROM_EMAIL = "hello@auditwavehk.com"
 ALERT_EMAIL = "shing0012000@gmail.com"
 EMAIL_DRY_RUN = "1"
+LLM_PROVIDER = "anthropic"  # "anthropic" | "openai" — set secret for chosen provider

@@ -1,7 +1,8 @@
-// Building classification — claude-haiku-4-5 with structured output.
-// Outputs BEEO Schedule category, new-scope flag, district, confidence.
+// Building classification with structured output.
+// Anthropic: claude-haiku-4-5  |  OpenAI: gpt-4o-mini
+// Provider selected by env.LLM_PROVIDER ("anthropic" default, "openai" alternative).
 
-import { claude } from "./llm";
+import { claude, openai } from "./llm";
 import { BUILDING_TYPES, DISTRICTS, NEW_SCOPE_TYPES, nowISO, type Env } from "./types";
 
 const SYSTEM_PROMPT = `You classify Hong Kong buildings for compliance with the Buildings Energy Efficiency Ordinance (Cap. 610, "BEEO") and its 2025 Amendment.
@@ -57,14 +58,28 @@ export async function classifyBuilding(env: Env, buildingId: string): Promise<vo
     `Address (繁中): ${b.address_zh ?? "—"}`,
   ].join("\n");
 
-  const raw = await claude({
-    apiKey: env.ANTHROPIC_API_KEY,
-    model: "claude-haiku-4-5",
-    maxTokens: 1024,
-    system: [{ text: SYSTEM_PROMPT, cache: true }],
-    user,
-    jsonSchema: SCHEMA as unknown as Record<string, unknown>,
-  });
+  const provider = env.LLM_PROVIDER ?? "anthropic";
+  let raw: string;
+
+  if (provider === "openai") {
+    raw = await openai({
+      apiKey: env.OPENAI_API_KEY!,
+      model: "gpt-4o-mini",
+      maxTokens: 1024,
+      system: SYSTEM_PROMPT,
+      user,
+      jsonSchema: SCHEMA as unknown as Record<string, unknown>,
+    });
+  } else {
+    raw = await claude({
+      apiKey: env.ANTHROPIC_API_KEY!,
+      model: "claude-haiku-4-5",
+      maxTokens: 1024,
+      system: [{ text: SYSTEM_PROMPT, cache: true }],
+      user,
+      jsonSchema: SCHEMA as unknown as Record<string, unknown>,
+    });
+  }
 
   const out = JSON.parse(raw) as {
     building_type: string; district: string; confidence: number; reasoning: string;

@@ -44,20 +44,26 @@ export default {
             console.log(`crawl ok: seen=${r.seen} new=${r.newRows}`);
             break;
           }
-          case "classify":
-            if (!env.ANTHROPIC_API_KEY) {
-              console.log("classify skipped: ANTHROPIC_API_KEY not set");
+          case "classify": {
+            const provider = env.LLM_PROVIDER ?? "anthropic";
+            const hasKey = provider === "openai" ? !!env.OPENAI_API_KEY : !!env.ANTHROPIC_API_KEY;
+            if (!hasKey) {
+              console.log(`classify skipped: ${provider.toUpperCase()}_API_KEY not set`);
               break;
             }
             await classifyBuilding(env, m.buildingId);
             break;
-          case "memo":
-            if (!env.ANTHROPIC_API_KEY) {
-              console.log("memo skipped: ANTHROPIC_API_KEY not set");
+          }
+          case "memo": {
+            const provider = env.LLM_PROVIDER ?? "anthropic";
+            const hasKey = provider === "openai" ? !!env.OPENAI_API_KEY : !!env.ANTHROPIC_API_KEY;
+            if (!hasKey) {
+              console.log(`memo skipped: ${provider.toUpperCase()}_API_KEY not set`);
               break;
             }
             await draftMemo(env, m.eafId);
             break;
+          }
           case "digest_dispatch":
             await dispatchDigest(env, m.clientId, m.periodStart, m.periodEnd);
             break;

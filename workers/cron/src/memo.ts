@@ -1,9 +1,9 @@
-// Bilingual outreach memo drafting — claude-sonnet-4-6.
-// The memo is what a subscriber (REA firm) can adapt and send to the building owner.
-// Hallucination guard: the prompt embeds the only statutory facts the model may cite;
-// it must not recall ordinance text from memory.
+// Bilingual outreach memo drafting.
+// Anthropic: claude-sonnet-4-6  |  OpenAI: gpt-4o
+// Provider selected by env.LLM_PROVIDER ("anthropic" default, "openai" alternative).
+// Hallucination guard: the prompt embeds the only statutory facts the model may cite.
 
-import { claude } from "./llm";
+import { claude, openai } from "./llm";
 import { nowISO, type Env } from "./types";
 
 const SYSTEM_PROMPT = `You draft short, professional outreach memos for Hong Kong building-services engineering firms (Registered Energy Assessors, REAs) to send to building owners or managers about upcoming statutory energy-audit deadlines.
@@ -56,14 +56,28 @@ export async function draftMemo(env: Env, eafId: string): Promise<void> {
     `Governing code edition for the next audit: ${row.code_edition}`,
   ].join("\n");
 
-  const raw = await claude({
-    apiKey: env.ANTHROPIC_API_KEY,
-    model: "claude-sonnet-4-6",
-    maxTokens: 2048,
-    system: [{ text: SYSTEM_PROMPT, cache: true }],
-    user,
-    jsonSchema: SCHEMA as unknown as Record<string, unknown>,
-  });
+  const provider = env.LLM_PROVIDER ?? "anthropic";
+  let raw: string;
+
+  if (provider === "openai") {
+    raw = await openai({
+      apiKey: env.OPENAI_API_KEY!,
+      model: "gpt-4o",
+      maxTokens: 2048,
+      system: SYSTEM_PROMPT,
+      user,
+      jsonSchema: SCHEMA as unknown as Record<string, unknown>,
+    });
+  } else {
+    raw = await claude({
+      apiKey: env.ANTHROPIC_API_KEY!,
+      model: "claude-sonnet-4-6",
+      maxTokens: 2048,
+      system: [{ text: SYSTEM_PROMPT, cache: true }],
+      user,
+      jsonSchema: SCHEMA as unknown as Record<string, unknown>,
+    });
+  }
 
   const out = JSON.parse(raw) as { memo_en: string; memo_zh: string };
   await env.DB.prepare(

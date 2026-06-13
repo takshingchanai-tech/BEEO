@@ -4,9 +4,13 @@ export interface Env {
   PIPELINE_QUEUE: Queue<PipelineMessage>;
 
   // secrets
-  ANTHROPIC_API_KEY: string;
+  ANTHROPIC_API_KEY?: string;
+  OPENAI_API_KEY?: string;
   RESEND_API_KEY?: string;
   CRON_TRIGGER_KEY: string;
+
+  // plain vars
+  LLM_PROVIDER?: string; // "anthropic" (default) | "openai"
 
   // plain vars (wrangler.toml)
   EMSD_EAF_EN_URL: string;
