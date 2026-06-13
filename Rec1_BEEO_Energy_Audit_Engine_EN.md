@@ -18,13 +18,13 @@ Realistic 12-month contribution toward a combined HK$80,000–150,000 MRR target
 
 The Buildings Energy Efficiency Ordinance (Cap. 610, "BEEO") requires owners of commercial buildings (and commercial portions of composite buildings) to commission a statutory **energy audit** of four key central building services installations, performed by a **Registered Energy Assessor (REA)**, with the resulting **Energy Audit Form (EAF)** displayed at the building entrance.
 
-**The 2026 inflection point.** The Buildings Energy Efficiency (Amendment) Ordinance 2025 (gazetted 20 June 2025) makes two changes that take effect **by 20 September 2026**:
+**The 2026 inflection point.** The Buildings Energy Efficiency (Amendment) Ordinance 2025 (gazetted 20 June 2025) brings three changes commencing **20 September 2026**:
 
 - **Nine additional building types** enter the audit regime: educational facilities, hospitals/healthcare, data centres, airports, government-owned buildings, and others.
-- **Audit interval halves from 10 years to 5 years.**
+- **Any audit conducted on or after 20 September 2026 carries a 5-year renewal interval** (down from 10 years). Existing EAFs issued before that date retain their original 10-year expiry.
 - Audit reports must disclose additional technical information; the new Building Energy Code and Energy Audit Code (2024 editions, effective 23 August 2025) raise efficiency standards by over 20% versus the 2015 editions.
 
-Thousands of buildings enter scope simultaneously, and every existing commercial building's renewal clock accelerates. Each audit engagement is worth **HK$50,000–300,000** to an REA firm. No one is systematically computing *which specific building's deadline lands when* — that computation is the product.
+Thousands of buildings in the nine new categories must commission their first-ever audit. Meanwhile, thousands more existing commercial buildings have 10-year EAF expiries falling due over the next 1–5 years — and all re-audits conducted post-commencement will be on the shorter 5-year cycle, permanently doubling renewal frequency going forward. Each audit engagement is worth **HK$50,000–300,000** to an REA firm. No one is systematically computing *which specific building's deadline lands when* — that computation is the product.
 
 ## 2. Pillar 1 — The Data Source Moat
 
@@ -35,7 +35,7 @@ Thousands of buildings enter scope simultaneously, and every existing commercial
 | BEEO + Amendment Ordinance text (`elegislation.gov.hk`, Cap. 610) | Building-type schedules, intervals, transitional provisions | Public |
 | CSDI / data.gov.hk building datasets | Building age, use, storeys, geocoding | Open CSV/API |
 
-The EAF issue date is the key field: **next statutory deadline = issue date + interval (10y legacy / 5y new regime)**. Because the register is form-gated rather than bulk-downloadable, whoever crawls and reconciles it longitudinally owns a deadline database that does not exist anywhere else — including inside EMSD's public surface.
+The EAF expiry date is the key field published by the register. For EAFs issued before 20 September 2026, the published expiry is the deadline. For re-audits conducted on or after that date, **next deadline = audit date + 5 years**. The register is publicly accessible to anyone who builds a scraper; the competitive advantage is not data exclusivity — it is the regulatory computation layer: correctly applying the transitional provisions to derive each building's actual next deadline, which no public interface provides.
 
 ## 3. Pillar 2 — The High-Value Problem & Trigger Events
 
@@ -51,7 +51,7 @@ The EAF issue date is the key field: **next statutory deadline = issue date + in
    └─> Worker: polite rate-limited crawl of EMSD EAF register (delta pages)
          └─> D1: upsert building records; compute deadline = EAF_date + interval
                └─> Queue: "classification" jobs
-                     └─> Worker + LLM (Workers AI / Claude Haiku):
+                     └─> Worker + LLM (Claude Haiku / GPT-4o-mini):
                            • classify building into BEEO schedule categories
                              (is this premises one of the 9 new types?)
                            • bilingual address normalization via CSDI lookup
@@ -70,7 +70,7 @@ The EAF issue date is the key field: **next statutory deadline = issue date + in
 
 ## 5. Pillar 4 — Platform Moat & Gatekeeping
 
-1. **No bulk export exists.** The EAF register must be crawled politely and reconciled over months. Your longitudinal database (first-seen dates, form renewals, disappearances) cannot be backfilled by a newcomer.
+1. **No official deadline computation exists.** The register is publicly scrapable, but correctly computing each building's next audit deadline under the 2025 Amendment's transitional provisions — including which buildings retain the legacy 10-year expiry and which fall under the new 5-year regime — requires encoded domain knowledge that a generic scraper cannot replicate.
 2. **Encoded regulatory logic.** Which interval applies (5 vs 10 years), which code edition governs, how transitional provisions treat buildings audited shortly before commencement — this is domain knowledge baked into your pipeline, invisible to a generic scraper.
 3. **Building-type classification accuracy.** Deciding whether a premises is an "educational facility" or "data centre" under the Schedule is a judgment task; your prompt corpus + correction history compounds.
 4. **Bilingual address graph** (shared asset with Recommendation 2): Traditional-Chinese building names ↔ English street addresses ↔ lot numbers.

@@ -119,18 +119,6 @@ export async function runCrawl(env: Env): Promise<{ seen: number; newRows: numbe
       "UPDATE crawl_runs SET finished_at=?, pages_fetched=2, rows_seen=?, rows_new=?, rows_changed=?, status='ok' WHERE id=?",
     ).bind(nowISO(), joined.length, newRows, changed, runId).run();
 
-    // Enqueue classification for unclassified, non-demolished buildings (budget per run)
-    const unclassified = await env.DB.prepare(
-      "SELECT id FROM buildings WHERE building_type IS NULL AND is_demolished = 0 LIMIT 200",
-    ).all<{ id: string }>();
-    if (unclassified.results.length > 0) {
-      const msgs = unclassified.results.map((r, i) => ({
-        body: { type: "classify", buildingId: r.id } as PipelineMessage,
-        delaySeconds: Math.floor(i / 2), // ~2 classifications/sec arrival rate
-      }));
-      await sendBatchChunked(env.PIPELINE_QUEUE, msgs);
-    }
-
     // Enqueue memo drafting: classified buildings whose deadline is inside 18 months,
     // no memo yet (budget 20/run to keep Sonnet spend predictable)
     const horizon = addMonthsISO(today, 18);

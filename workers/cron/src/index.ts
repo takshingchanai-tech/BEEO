@@ -101,19 +101,22 @@ export default {
         return json({ dispatched: n });
       }
       case "/classify-batch": {
-        // backfill helper: enqueue N unclassified buildings
-        const limit = Math.min(Number(url.searchParams.get("n") ?? 100), 500);
+        // backfill helper: enqueue N unclassified buildings at optional OFFSET
+        // Use offset to fan out parallel calls over non-overlapping slices, e.g.:
+        //   /classify-batch?n=200&offset=0
+        //   /classify-batch?n=200&offset=200  ...
+        const limit = Math.min(Number(url.searchParams.get("n") ?? 200), 500);
+        const offset = Math.max(Number(url.searchParams.get("offset") ?? 0), 0);
         const rows = await env.DB.prepare(
-          "SELECT id FROM buildings WHERE building_type IS NULL AND is_demolished=0 LIMIT ?",
-        ).bind(limit).all<{ id: string }>();
+          "SELECT id FROM buildings WHERE building_type IS NULL AND is_demolished=0 LIMIT ? OFFSET ?",
+        ).bind(limit, offset).all<{ id: string }>();
         await sendBatchChunked(
           env.PIPELINE_QUEUE,
-          rows.results.map((r, i) => ({
+          rows.results.map((r) => ({
             body: { type: "classify", buildingId: r.id } as PipelineMessage,
-            delaySeconds: Math.floor(i / 2),
           })),
         );
-        return json({ queued_classify: rows.results.length });
+        return json({ queued_classify: rows.results.length, offset });
       }
       case "/trigger-trials": {
         await runTrialManagement(env);

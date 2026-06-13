@@ -8,7 +8,7 @@
 
 ## 1. What we're building (one paragraph)
 
-A zero-touch subscription intelligence service for Hong Kong Registered Energy Assessor (REA) firms. A daily cron crawls the EMSD Energy Audit Form (EAF) register, computes each building's statutory next-audit deadline (EAF issue date + 10y legacy / 5y new regime), classifies buildings into the 9 newly-in-scope BEEO Schedule categories with Claude Haiku, drafts bilingual (EN/繁中) outreach memos with Claude Sonnet for newly-triggered buildings, and emails subscribers a weekly deadline-pipeline digest filtered by district and building type. Three flat-rate tiers: District HK$2,500/mo · Territory HK$5,000/mo · Exclusive vertical HK$9,000/mo.
+A deadline-intelligence service for Hong Kong Registered Energy Assessor (REA) firms. A daily cron crawls the EMSD Energy Audit Form (EAF) register, computes each building's statutory next-audit deadline (pre-commencement EAFs: published expiry stands; audits conducted on/after 20 Sep 2026: audit date + 5 years), classifies buildings into the 9 newly-in-scope BEEO Schedule categories, drafts bilingual (EN/繁中) outreach memos for newly-triggered buildings, and delivers a weekly deadline-pipeline digest filtered by district and building type. Three flat-rate tiers as currently implemented: District HK$2,500/mo · Territory HK$5,000/mo · Exclusive vertical HK$9,000/mo. **Note:** the recurring subscription model assumes ongoing lead flow from the rolling pipeline of 10-year expiries + new building types; a one-time data purchase or annual model is a viable alternative if monthly churn proves too high.
 
 **Key simplification vs NorwayContact:** no Gmail/Outlook OAuth at all. Subscribers *receive* digests from our own domain via Resend — we never send from their inboxes. This removes the entire OAuth surface (tokens, refresh, encryption, inbox-uniqueness, reconnect flows), which was the most complex and bug-prone part of the Norway codebase.
 
@@ -79,7 +79,7 @@ CREATE TABLE IF NOT EXISTS buildings (
   lat                REAL,
   lng                REAL,
   enrich_source      TEXT,                    -- 'csdi' | 'datagovhk' | NULL
-  first_seen         TEXT NOT NULL,           -- ISO date first observed in register (the moat)
+  first_seen         TEXT NOT NULL,           -- ISO date first observed in register
   last_seen          TEXT NOT NULL,
   created_at         TEXT NOT NULL
 );
@@ -89,9 +89,9 @@ CREATE TABLE IF NOT EXISTS eaf_records (
   id                 TEXT PRIMARY KEY,
   building_id        TEXT NOT NULL REFERENCES buildings(id),
   eaf_number         TEXT,
-  issue_date         TEXT NOT NULL,           -- ISO date — THE key field
-  interval_years     INTEGER NOT NULL,        -- 10 (legacy) or 5 (new regime)
-  deadline           TEXT NOT NULL,           -- computed: issue_date + interval (regulatory logic in code)
+  expiry_date        TEXT NOT NULL,           -- ISO date published by the register — THE key field
+  interval_years     INTEGER NOT NULL,        -- 10 (legacy, pre-commencement) or 5 (post-commencement audits)
+  deadline           TEXT NOT NULL,           -- for pre-commencement EAFs: expiry_date; for post-commencement: audit_date + 5y
   code_edition       TEXT NOT NULL,           -- 'BEC2015/EAC2015' | 'BEC2024/EAC2024'
   source_page_r2_key TEXT,                    -- R2 key of the HTML snapshot this row was parsed from
   first_seen         TEXT NOT NULL,
@@ -297,10 +297,12 @@ bucket_name = "auditwave-crawl-cache"
 
 Raw `fetch` to `https://api.anthropic.com/v1/messages` from the Worker (no SDK dependency needed in Workers; keeps bundle small — same philosophy as Norway's raw Stripe/Resend calls).
 
-| Task | Model | Est. tokens/call | Price | Volume | Est. cost |
-|---|---|---|---|---|---|
-| Building classification | `claude-haiku-4-5` | ~1.5K in / 200 out | $1 / $5 per MTok | backfill ~8K buildings once; then ~50/day | backfill ≈ $14 one-time; ≈ $2/mo steady |
-| Bilingual memo drafting | `claude-sonnet-4-6` | ~2K in / 800 out | $3 / $15 per MTok | ~10–30/day | ≈ $6–15/mo |
+Provider selected by `LLM_PROVIDER` env var (`"anthropic"` or `"openai"`); currently set to `"openai"`. Set `OPENAI_API_KEY` or `ANTHROPIC_API_KEY` to match.
+
+| Task | Anthropic model | OpenAI model | Volume | Est. cost |
+|---|---|---|---|---|
+| Building classification | `claude-haiku-4-5` | `gpt-4o-mini` | backfill ~2,556 once; ~50/day steady | backfill ≈ $5–15; ≈ $2/mo steady |
+| Bilingual memo drafting | `claude-sonnet-4-6` | `gpt-4o` | ~10–30/day | ≈ $6–15/mo |
 
 - Classification uses **structured outputs** (`output_config.format` json_schema: `{category, is_new_scope, confidence, name_zh, name_en, district}`) so parsing never breaks.
 - Put the static Schedule-definitions system prompt first with `cache_control: {type:"ephemeral"}` — classification calls within a crawl run hit the prompt cache (5-min TTL fits the queue cadence).
@@ -391,7 +393,8 @@ Clone the norgeconnect structure; the language pair changes from NO/EN to **繁�
 | `STRIPE_SECRET_KEY` | api, cron, stripe |
 | `STRIPE_WEBHOOK_SECRET` | stripe |
 | `RESEND_API_KEY` | api, cron, stripe |
-| `ANTHROPIC_API_KEY` | cron |
+| `ANTHROPIC_API_KEY` | cron (if `LLM_PROVIDER="anthropic"`) |
+| `OPENAI_API_KEY` | cron (if `LLM_PROVIDER="openai"` — current default) |
 | `TOKEN_ENCRYPTION_KEY` | api, cron (sessions, unsubscribe HMAC, login HKDF sub-keys) |
 | `CRON_TRIGGER_KEY` | cron |
 
@@ -477,6 +480,8 @@ Reuses: crawl machinery, queue pipeline, classification/memo handlers (prompt sw
 | Memo hallucinates ordinance text | Memo prompt only allows citing from a vetted statute-snippet library embedded in the prompt (no free recall); Phase-2 test gate checks citations |
 | Exclusive tier double-sell | Partial unique index + atomic claim; webhook failure path alerts for manual resolution |
 | New-domain email reputation (digests junked) | Buy domain at Phase-3 start (≥4 weeks before first paid digest); full DKIM/SPF/DMARC; low-volume warm-up via seeded prospect emails |
+| Monthly subscription hard to justify if data changes slowly | The register is mostly static; a competitor can one-time scrape the same data. Subscription value must come from the rolling pipeline of expiries + ongoing outreach execution, not data freshness. Evaluate one-time data purchase (HK$3,000–8,000) or annual model as alternatives before or after first paying cohort. |
+| Raw data is not a defensible moat | The competitive advantage is the regulatory computation layer (transitional provision logic) + classification accuracy + bilingual memo quality — not data access. Pitch accordingly. |
 
 ---
 

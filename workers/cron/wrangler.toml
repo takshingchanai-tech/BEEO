@@ -20,7 +20,8 @@ binding = "PIPELINE_QUEUE"
 
 [[queues.consumers]]
 queue = "auditwave-queue"
-max_batch_size = 5
+max_batch_size = 10
+max_concurrency = 10
 max_retries = 3
 
 [vars]
@@ -30,4 +31,4 @@ SITE_URL = "https://auditwave.pages.dev"
 SYSTEM_FROM_EMAIL = "hello@auditwavehk.com"
 ALERT_EMAIL = "shing0012000@gmail.com"
 EMAIL_DRY_RUN = "1"
-LLM_PROVIDER = "anthropic"  # "anthropic" | "openai" — set secret for chosen provider
+LLM_PROVIDER = "openai"  # "anthropic" | "openai" — set secret for chosen provider

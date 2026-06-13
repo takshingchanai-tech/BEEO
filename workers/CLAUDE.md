@@ -43,8 +43,8 @@ Queue messages (one queue, `type` discriminator):
 | type | does |
 |---|---|
 | `crawl` | Fetch EN+TC register pages, snapshot to R2 (`eaf/YYYY-MM-DD/{en,tc}.html`), parse+join, upsert buildings/eaf_records with computed deadlines, record crawl_runs, enqueue classify (≤200) and memo (≤20) jobs |
-| `classify` | One building → `claude-haiku-4-5` structured output: building_type, district, confidence. `confidence < 0.7` → stored as `unknown` (manual review pool). Skipped+acked if ANTHROPIC_API_KEY unset |
-| `memo` | One EAF → `claude-sonnet-4-6` bilingual outreach memo. Hallucination guard: prompt embeds the only citable statutory facts |
+| `classify` | One building → LLM structured output (provider set by `LLM_PROVIDER`: `claude-haiku-4-5` or `gpt-4o-mini`): building_type, district, confidence. `confidence < 0.7` → stored as `unknown` (manual review pool). Skipped+acked if API key unset |
+| `memo` | One EAF → LLM bilingual outreach memo (`claude-sonnet-4-6` or `gpt-4o`). Hallucination guard: prompt embeds the only citable statutory facts |
 | `digest_dispatch` | One client → select new leads (deadline ≤18mo, filters, minus delivered_leads), enqueue digest_email |
 | `digest_email` | Render + send one digest via Resend; write sent_digests + delivered_leads |
 
@@ -102,16 +102,19 @@ Cancellation releases `exclusive_vertical`.
 |---|---|---|
 | `CRON_TRIGGER_KEY` | cron | ✅ set (value in `cron/.cron_trigger_key`) |
 | `TOKEN_ENCRYPTION_KEY` | api | ✅ set |
-| `ANTHROPIC_API_KEY` | cron | ❌ NOT SET — classify/memo stages skip until set |
+| `OPENAI_API_KEY` | cron | ❌ NOT SET — current provider (`LLM_PROVIDER="openai"`); classify/memo skip until set |
+| `ANTHROPIC_API_KEY` | cron | ❌ NOT SET — only needed if switching to `LLM_PROVIDER="anthropic"` |
 | `RESEND_API_KEY` | api, cron, stripe | ❌ not set — EMAIL_DRY_RUN="1" logs instead of sending |
 | `STRIPE_SECRET_KEY` | stripe (+api for cancel) | ⚠️ placeholder on stripe; not set on api |
 | `STRIPE_WEBHOOK_SECRET` | stripe | ⚠️ placeholder |
 
 ## Go-live checklist (remaining)
 
-1. `cd workers/cron && npx wrangler secret put ANTHROPIC_API_KEY` → then backfill
-   classification: `curl ".../classify-batch?key=$KEY&n=500"` repeatedly (~2,556 buildings,
-   haiku, ~US$15 total). District/type filters only fully work after this.
+1. Set LLM API key → backfill classification:
+   - OpenAI (current): `cd workers/cron && npx wrangler secret put OPENAI_API_KEY`
+   - Anthropic (alternative): change `LLM_PROVIDER="anthropic"` in wrangler.toml, then `npx wrangler secret put ANTHROPIC_API_KEY`
+   - Then: `curl ".../classify-batch?key=$KEY&n=500"` repeatedly (~2,556 buildings, ~US$5–15 total).
+   - District/type filters only fully work after classification backfill completes.
 2. Buy domain (auditwavehk.com or other) → attach to Pages project → update SITE_URL /
    CORS_ORIGIN / API_BASE (site `lib/config.ts`) → Resend domain + DKIM/SPF/DMARC →
    `wrangler secret put RESEND_API_KEY` on all 3 workers → set `EMAIL_DRY_RUN="0"`.

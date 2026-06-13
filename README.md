@@ -46,15 +46,17 @@ interval (published expiry stands). 5-year cycle only applies to audits conducte
 commencement. `computeDeadlines()` updated, 24/24 tests green. Deploy cron worker to refresh
 D1 deadline values.
 
-## Pricing (monthly, HKD)
+## Pricing (current implementation, HKD)
 
 | Tier | Price | Includes |
 |---|---|---|
-| District | 2,500 | Chosen districts, weekly digest + bilingual memos |
-| Territory | 5,000 | All 18 districts, building-type filters, CSV export |
-| Exclusive vertical | 9,000 | One building category exclusively (max 1 buyer/vertical) |
+| District | 2,500/mo | Chosen districts, weekly digest + bilingual memos |
+| Territory | 5,000/mo | All 18 districts, building-type filters, CSV export |
+| Exclusive vertical | 9,000/mo | One building category exclusively (max 1 buyer/vertical) |
 
 14-day free trial, no card. Trial → awaiting → active → cancelled (paused on payment failure).
+
+⚠️ **Business model under review.** The EAF register is mostly static — new buildings are added infrequently. Monthly subscription value depends on the rolling pipeline of 10-year expiries + new building types, not data freshness. Alternatives to evaluate before first paid cohort: one-time data purchase (HK$3,000–8,000 flat), annual subscription, or service model (outreach execution on client's behalf).
 
 ## Common commands
 
